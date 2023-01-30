@@ -9,7 +9,8 @@ const ChatBody = ({ chat }) => {
             {
                 chat.map((message, i) => {
                     return (
-                        <div key={i} className='border-[#999999] break-words border-2 rounded-xl self-end px-3 py-3 max-w-[80%]'>
+                        <div key={i} className={`border-[#999999] break-words border-2 rounded-xl self-end px-3 py-3 max-w-[80%] ${message.sender === "ai" && aiStyle}`}>
+
                             <pre className='whitespaces-pre-wrap'>
                                 <span>{message.message}</span>
                             </pre>
@@ -17,15 +18,6 @@ const ChatBody = ({ chat }) => {
                     );
                 })
             }
-
-
-            {/* AI response */}
-
-            {/* <div className={`border-[#999999] break-words border-2 rounded-xl self-end px-3 py-3 max-w-[80%] ${aiStyle}`}>
-                <pre>
-                    <span>I can help with anything</span>
-                </pre>
-            </div> */}
         </div>
     );
 };

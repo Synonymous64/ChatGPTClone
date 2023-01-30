@@ -1,10 +1,23 @@
 import { useState } from 'react'
 import ChatBody from './components/ChatBody'
 import ChatInput from './components/ChatInput'
+import { useMutation } from 'react-query';
+import { fetchResponse } from './api';
+
 function App() {
   const [chat, setChat] = useState([]);
+
+  const mutation = useMutation({
+    mutationFn: () => {
+      return fetchResponse(chat);
+    },
+    onSuccess: (data) => console.log(data)
+  })
+
+
   const sendMessage = async (message) => {
     await Promise.resolve(setChat((prev) => [...prev, message]))
+    mutation.mutate();
   }
   return (
     <div className='bg-[#1A232E] h-screen py-6 relative sm:px-16 px-12 text-white overflow-hidden flex flex-col justify-between align-middle'>
